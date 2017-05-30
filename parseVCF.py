@@ -3,6 +3,12 @@ Created on Jan 27, 2017
 
 @author: bensen
 '''
+# parseVCF
+# 1/27/17
+# This is a python script to parse variant records from different large population sequencing projects- specifically 
+# the Thousand Genomes project, the Exome Sequencing Project, and the Exome Aggregation Consortium- in order to create 
+# tabulated output of allele frequencies for each variant to allow for simple comparison between studies and ethnicities.
+
 # Import PyVCF
 import vcf
 
