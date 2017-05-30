@@ -18,18 +18,11 @@ exac_dict = {}
 # Accept user input for 1000 Genomes Project .vcf file
 g1k_input_file = input("\nPlease type in the file path/name to the 1000 Genomes Project (1KG) .vcf file you would like to parse and press 'Enter': ")
 
-# Code in development to incorporate tabix indexing
-#g1k_chrNum = input("\nPlease type in the chromosome number of the 1000 Genomes Project .vcf file you would like to parse and press 'Enter': ")
-
 # Accepts user input for Exome Sequencing Project .vcf file
 esp_input_file = input("\nPlease type in the file path/name to the Exome Sequencing Project (ESP) .vcf file you would like to parse and press 'Enter': ")
 
-# Code in development to incorporate tabix indexing
-#esp_chrNum = input("\nPlease type in the chromosome number of the Exome Sequencing Project (ESP) .vcf file you would like to parse and press 'Enter': ")
-
 # Accepts user input for Exome Aggregation Consortium .vcf file
 exac_input_file = input("\nPlease type in the file path/name to the Exome Aggregation Consortium (ExAC) .vcf file you would like to parse and press 'Enter': ")
-#exac_chrNum = input("\nPlease type in the chromosome number of the Exome Aggregation Consortium (ExAC) .vcf file you would like to parse and press 'Enter': ")
 
 # Accepts user input to specify output file
 output_file = input("\nPlease type in the file path/name of your desired output file and press 'Enter': ")
@@ -227,9 +220,7 @@ for key in exac_dict:
             "\t" + str(exac_dict[key][16]) + "\t" + str(exac_dict[key][17]) + "\t" + str(exac_dict[key][18]) + "\t" + str(exac_dict[key][19]) + 
             "\t" + str(exac_dict[key][20]) + "\t" + str(exac_dict[key][21]) + "\t" + str(exac_dict[key][22]) + "\t" + str(exac_dict[key][23]) + 
             "\t" + str(exac_dict[key][24]) + "\t" + str(exac_dict[key][25]) + "\t" + str(exac_dict[key][26]) + "\t" + str(exac_dict[key][27]) + "\n")
-
-# Maybe implement default dict for nested dictionaries? 
-#dict.setdefault(key, default=None)    
+ 
 
     
     
