@@ -1,7 +1,7 @@
 '''
 Created on Jun 26, 2017
 
-@author: bensen
+@author: Nicholas B. Bense
 '''
 
 # crossResultsCNV
