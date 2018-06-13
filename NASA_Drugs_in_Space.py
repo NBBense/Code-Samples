@@ -3,7 +3,7 @@
 # Protocell Protein Expression, and 
 # Pharmaceutical Nano-Precipitation.
 
-# Import Packages
+# Import packages
 import RPi.GPIO as GPIO
 import time
 import picamera
@@ -60,7 +60,7 @@ wait(starting_time, TURN_OFF_GSK_SLOW)
 GPIO.output(GSK_SLOW_PUMP, 0)
 GPIO.output(GSK_FAST_PUMP, 0)
 
-# Turn off LEDs and Camera
+# Turn off LEDs and camera
 wait(starting_time, TURN_OFF_CAMERA_LEDS)
 GPIO.output(LED, 0)
 camera.stop_recording()
