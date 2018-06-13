@@ -1,4 +1,11 @@
-# Drugs in Space: A Scientific Payload for 
+################################################################################
+# Title: Drugs in Space: A Scientific Payload for Investigations of RNA Folding, 
+# Synthetic Protocell Protein Expression, and Pharmaceutical Nano-Precipitation.
+# Author: Nicholas Bense/Calvin Robinson
+# Date: 5/30/18
+################################################################################
+
+Drugs in Space: A Scientific Payload for 
 # Investigations of RNA Folding, Synthetic 
 # Protocell Protein Expression, and 
 # Pharmaceutical Nano-Precipitation.
