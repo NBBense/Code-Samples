@@ -1,7 +1,9 @@
 ################################################################################
-# Title: Parse GEO Metadata/Expression
+# Title: parseGEOsets.R
 # Author: Nicholas Bense
 # Date: 4/10/18
+# Description: Script to parse and separate Gene Expression Omnibus (GEO) expression 
+# values and metadata information then subset into disease and control partitions.
 ################################################################################
 
 # Install/load the required libraries
