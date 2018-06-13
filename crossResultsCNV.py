@@ -1,9 +1,12 @@
-# crossResultsCNV
-# 6/26/17
-# This is a custom python script to cross reference and annotate raw results from the XHMM, Codex, and Clamms germline 
+################################################################################
+# Title: crossResultsCNV
+# Author: Nicholas Bense
+# Date: 6/26/17
+# Description: This is a custom python script to cross reference and annotate raw results from the XHMM, Codex, and Clamms germline 
 # CNV callers to detect matching events that are discovered in the same gene regions. This is intended to allow for comparison
 # of the respective quality metric scores used in determining the likelihood of an event being true positive or false positive 
 # as well as the correlation of phenotype data in a germ-line CNV calling pipeline.
+################################################################################
 
 # Import packages
 from collections import defaultdict
