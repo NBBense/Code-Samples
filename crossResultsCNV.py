@@ -1,9 +1,3 @@
-'''
-Created on Jun 26, 2017
-
-@author: Nicholas B. Bense
-'''
-
 # crossResultsCNV
 # 6/26/17
 # This is a custom python script to cross reference and annotate raw results from the XHMM, Codex, and Clamms germline 
@@ -11,6 +5,7 @@ Created on Jun 26, 2017
 # of the respective quality metric scores used in determining the likelihood of an event being true positive or false positive 
 # as well as the correlation of phenotype data in a germ-line CNV calling pipeline.
 
+# Import packages
 from collections import defaultdict
 import subprocess
 import re
