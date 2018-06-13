@@ -1,3 +1,3 @@
 # Projects
 
-This is a repository that contains coding samples from several different bioinformatics and data science projects I am have been working on.
+Coding sample repository from several different bioinformatics/data science projects I am have been working on.
