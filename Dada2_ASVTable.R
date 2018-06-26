@@ -55,7 +55,6 @@ if (!is.null(args$rev)){
   
   # Extract sample names from filepath/name
   sample.names<-sapply(strsplit(basename(args$fwd), "[.]"), `[`, 1)
-  sample.names<-sapply(sample.names,function(x) gsub("_R1.",".",as.character(x)))
 
   # Learn error model for single end reads
   err_fns <- learnErrors(args$fwd, multithread=FALSE)
