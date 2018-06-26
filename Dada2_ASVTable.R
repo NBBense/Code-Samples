@@ -19,11 +19,6 @@ parser$add_argument("-r","--rev",type="character",default=NULL,help="Name/path t
 parser$add_argument("-o","--out",type="logical",default="Dada2_ASVTable.tsv",help="Name/path to ASV table file output")
 parser$add_argument("--pyr",type="logical",default=FALSE,help="Specify whether or not the data is from 454 pyrosequencing")
 
-# (In development) functionality for user to use Dada2's filter/trim function
-#make_argsion("--IT",type="logical",default=FALSE,help="Specify whether or not the data is from IonTorrent pyrosequencing")
-#make_argsion("-filt",type="logical",default=TRUE,help="Specify whether or not to use Dada2's filter and trim utility"),
-#make_argsion("-maxLen",type="integer",default=NULL,help="Specify maximum length of reads (recommended for 454 pyrosequencing based on chemistry)"),
-  
 # Parse arguments
 args <- parser$parse_args()
 
