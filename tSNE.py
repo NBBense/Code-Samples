@@ -8,15 +8,15 @@ from sklearn.manifold import TSNE
 matplotlib.use('TkAgg')
 
 filenames = []
-for file in os.listdir('/Users/nbense/NASA/BRAILLE/SEM_Updated_All/tif_files/'):
+for file in os.listdir('/Users/nbense/SEM_Updated_All/tif_files/'):
     if file.endswith( ('.tif') ): 
         print(file)
         filenames.append(file)
-with open("/Users/nbense/NASA/BRAILLE/SE_Subset.txt", "r") as subsetfile:
+with open("/Users/nbense/SE_Subset.txt", "r") as subsetfile:
     for newline in subsetfile:
         filenames.append(newline.rstrip())
 
-os.chdir('/Users/nbense/NASA/BRAILLE/SEM_Updated_All/tif_files/')
+os.chdir('/Users/nbense/SEM_Updated_All/tif_files/')
 img1 = Image.open(str(filenames[0])).convert("L")
 listsamples = []
 listfilenames = []
@@ -65,7 +65,7 @@ pca_result_50 = pca_50.fit_transform(df[feat_cols].values)
 print ('Cumulative explained variation for 50 principal components: {}'.format(np.sum(pca_50.explained_variance_ratio_)))
 
 new_pca_df = df.loc[:, ['pca-one','pca-two','pca-three','label','filename']]
-new_pca_df.to_csv('/Users/nbense/NASA/BRAILLE/SEM_Updated_All/SEM_PCA_SE_Subset_Labels.csv')
+new_pca_df.to_csv('/Users/nbense/SEM_Updated_All/SEM_PCA_SE_Subset_Labels.csv')
 
 tsne = TSNE(n_components=2, verbose=1, perplexity=40, n_iter=300)
 tsne.fit_transform(df[feat_cols].values)
@@ -78,4 +78,4 @@ tsne_df['label'] = imglabel
 tsne_df['filename'] = namefile
 
 new_tsne_df = tsne_df.loc[:, ['x-tsne','y-tsne','label','filename']]
-new_tsne_df.to_csv('/Users/nbense/NASA/BRAILLE/SEM_Updated_All/SEM_TSNE_SE_Subset_Labels.csv')
+new_tsne_df.to_csv('/Users/nbense/SEM_Updated_All/SEM_TSNE_SE_Subset_Labels.csv')
