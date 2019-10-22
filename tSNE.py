@@ -1,8 +1,3 @@
-'''
-Created on Jan 12, 2019
-
-@author: nbense
-'''
 from sklearn.decomposition import PCA
 import pandas as pd
 from PIL import Image
@@ -14,7 +9,7 @@ matplotlib.use('TkAgg')
 
 filenames = []
 for file in os.listdir('/Users/nbense/NASA/BRAILLE/SEM_Updated_All/tif_files/'):
-    if file.endswith( ('.tif') ): # whatever file types you're using...
+    if file.endswith( ('.tif') ): 
         print(file)
         filenames.append(file)
 with open("/Users/nbense/NASA/BRAILLE/SE_Subset.txt", "r") as subsetfile:
@@ -84,9 +79,3 @@ tsne_df['filename'] = namefile
 
 new_tsne_df = tsne_df.loc[:, ['x-tsne','y-tsne','label','filename']]
 new_tsne_df.to_csv('/Users/nbense/NASA/BRAILLE/SEM_Updated_All/SEM_TSNE_SE_Subset_Labels.csv')
-
-#img = Image.open(str(filename)).convert("L")
-#testarr = np.array(img)
-#testarr = np.array(img)
-#imgtrunctest = Image.fromarray(testarr[0:1020])
-#imgtrunctest.save("trunctest2.jpeg")
