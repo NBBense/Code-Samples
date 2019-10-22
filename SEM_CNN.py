@@ -1,3 +1,11 @@
+################################################################################
+# Title: SEM_CNN
+# Author: Nicholas Bense
+# Date: 4/26/19
+# Description: Python script to apply Convolutional Neural Network for classification 
+# of morphologies present in Scanning Electron Microscopy (SEM) images.
+################################################################################
+
 from keras.models import Sequential
 from keras.preprocessing.image import ImageDataGenerator, img_to_array, load_img
 from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization
@@ -11,7 +19,7 @@ from sklearn.utils import shuffle
 from keras.utils import to_categorical
 
 
-df = pd.read_csv("/Users/nbense/NASA/BRAILLE/SEM_CNN/SEM_CNN_Labels.csv")
+df = pd.read_csv("/Users/nbense/SEM_CNN/SEM_CNN_Labels.csv")
 df["labels"]=df["labels"].apply(lambda x:x.split(","))
 df = shuffle(df)
 
@@ -20,7 +28,7 @@ test_datagen=ImageDataGenerator(rescale=1./255.)
 
 train_generator=datagen.flow_from_dataframe(
 dataframe=df[:600],
-directory="/Users/nbense/NASA/BRAILLE/SEM_CNN/Images/",
+directory="/Users/nbense/SEM_CNN/Images/",
 x_col="Filenames",
 y_col="labels",
 batch_size=32,
@@ -32,7 +40,7 @@ target_size=(1020,1024))
 
 valid_generator=test_datagen.flow_from_dataframe(
 dataframe=df[600:670],
-directory="/Users/nbense/NASA/BRAILLE/SEM_CNN/Images/",
+directory="/Users/nbense/SEM_CNN/Images/",
 x_col="Filenames",
 y_col="labels",
 batch_size=32,
@@ -44,7 +52,7 @@ target_size=(1020,1024))
 
 test_generator=test_datagen.flow_from_dataframe(
 dataframe=df[670:733],
-directory="/Users/nbense/NASA/BRAILLE/SEM_CNN/Images/",
+directory="/Users/nbense/SEM_CNN/Images/",
 x_col="Filenames",
 batch_size=1,
 seed=42,
