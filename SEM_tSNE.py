@@ -1,3 +1,12 @@
+################################################################################
+# Title: SEM_tSNE
+# Author: Nicholas Bense
+# Date: 4/26/19
+# Description: Python script to apply Principal Component Analysis (PCA) and 
+# t-Distributed Stochastic Neighbor Embedding (tSNE) for unsupervised exploration
+# of Scanning Electron Microscopy (SEM) image data.
+################################################################################
+
 from sklearn.decomposition import PCA
 import pandas as pd
 from PIL import Image
