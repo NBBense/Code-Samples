@@ -1,0 +1,107 @@
+---
+title: "FirebrowseR TCGA PD1/PDL1 Expression Analysis"
+author: "Nicholas Bense"
+date: "10/21/2019"
+output: html_document
+---
+
+This code utlizes FirebrowseR in order to gather information on the highest PD1 and PDL1 mRNA expression data from RSEM RNA Sequencing counts in The Cancer Genome Atlas (TCGA) database.
+
+```{r message = FALSE, warning = FALSE}
+
+# Load Required Packages
+library(FirebrowseR)
+library(data.table)
+library(ggplot2)
+
+# Locate PD1 and PDL1 genes by using gene synonyms
+diff.Exp.Genes = c("PDCD1","CD274")
+
+# Initialize FirebrowseR query parameters
+all.Found = F
+page.Counter = 1
+mRNA.Exp = list()
+page.Size = 2000 
+
+# Conduct FirebrowseR query for RSEM mRNA expression data
+while(all.Found == F){
+  mRNA.Exp[[page.Counter]] = Samples.mRNASeq(format = "tsv",
+                                             gene = diff.Exp.Genes,
+                                             protocol = "RSEM",
+                                             page_size = page.Size,
+                                             page = page.Counter)
+  if(nrow(mRNA.Exp[[page.Counter]]) < page.Size)
+    all.Found = T
+  else
+    page.Counter = page.Counter + 1
+}
+
+# Consolidate data frame list into a single data frame
+fulltable<-rbindlist(mRNA.Exp)
+
+# Create table of PD1 expression data
+PDCD1.table<- fulltable[fulltable$gene == "PDCD1",]
+
+# Initialize data frame for PD1 expression data
+colClasses = c("character", "numeric")
+col.names = c("Cohort", "PD1 Median Expression Value")
+PDCD1.median.table <- read.table(text = "",
+                 colClasses = colClasses,
+                 col.names = col.names,
+                 stringsAsFactors=FALSE)
+
+# Loop through cohorts to gather PD1 expression data for each disease type
+for (single.cohort in unique(fulltable$cohort)){
+  cohort.subset<-PDCD1.table[PDCD1.table$cohort == single.cohort,]
+  PDCD1.median.row<-cbind(single.cohort,median(cohort.subset$expression_log2))
+  PDCD1.median.table<-rbind(PDCD1.median.row,PDCD1.median.table)
+}
+
+# Create table of PDL1 expression data
+CD274.table<- fulltable[fulltable$gene == "CD274",]
+
+# Initialize data frame for PDL1 expression data
+colClasses = c("character", "numeric", "numeric")
+col.names = c("Cohort","PD1 Median Expression Value","PDL1 Median Expression Value")
+combined.median.table <- read.table(text = "",
+                 colClasses = colClasses,
+                 col.names = col.names,
+                 stringsAsFactors=FALSE)
+
+# Loop through cohorts to gather PDL1 expression data for each disease type
+for (single.cohort in unique(fulltable$cohort)){
+  cohort.subset<-CD274.table[CD274.table$cohort == single.cohort,]
+  CD274.median.row<-cbind(
+    PDCD1.median.table[PDCD1.median.table$single.cohort==single.cohort,],
+    median(cohort.subset$expression_log2))
+  colnames(CD274.median.row) = c("Cohort","PD1 Median Expression Value","PDL1 Median Expression Value")
+  combined.median.table<-rbind(CD274.median.row,combined.median.table)
+}
+
+# Cleanup data format and remove 'NA's
+combined.median.table$`PD1 Median Expression Value`<-as.numeric(as.character(combined.median.table$`PD1 Median Expression Value`))
+combined.median.table$`PDL1 Median Expression Value`<-as.numeric(combined.median.table$`PDL1 Median Expression Value`)
+combined.median.table <- na.omit(combined.median.table) 
+
+# Create combined expression column
+combined.median.table$`Combined Expression Value`=rowSums(cbind(combined.median.table$`PD1 Median Expression Value`,combined.median.table$`PDL1 Median Expression Value`))
+
+# Sort table by decreasing combined expression column
+combined.median.table <- combined.median.table[order(-combined.median.table$`Combined Expression Value`),]
+
+# Write TSV table to file
+write.table(combined.median.table, file='PD1_PDL1_Median_Co-expression.tsv', quote=FALSE, sep='\t', col.names = NA)
+
+# Create scatter plot of co-expression values
+p<-ggplot(combined.median.table, aes(x=combined.median.table$`PD1 Median Expression Value`, y=combined.median.table$`PDL1 Median Expression Value`, color = `Combined Expression Value`)) +
+  geom_point() + 
+  ggtitle("PD1/PDL1 Median Co-expression") +
+  xlab("PD1 Median Expression Value") + ylab("PDL1 Median Expression Value") +
+  scale_color_gradient(low = "#0091ff", high = "#f0650e") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_text(label=combined.median.table$Cohort, position = position_nudge(y = 0.1))
+p + labs(color = "Co-expression Value")
+
+# Print out final output table
+print(combined.median.table)
+```
