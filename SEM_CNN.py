@@ -13,18 +13,7 @@ from keras.utils import to_categorical
 
 df = pd.read_csv("/Users/nbense/NASA/BRAILLE/SEM_CNN/SEM_CNN_Labels.csv")
 df["labels"]=df["labels"].apply(lambda x:x.split(","))
-
 df = shuffle(df)
-
-#print df["labels"]
-#print(df["labels"].shape)
-
-#train_labels = to_categorical(train_labels)
-
-#img = load_img('/Users/nbense/NASA/BRAILLE/SEM_CNN/Images/GOL29-A60-01.tif')
-#x = img_to_array(img)
-#print len(x)
-#print len(x[1])
 
 datagen=ImageDataGenerator(rescale=1./255.)
 test_datagen=ImageDataGenerator(rescale=1./255.)
@@ -113,5 +102,4 @@ filenames=test_generator.filenames
 results=pd.DataFrame({"Filename":filenames,
                       "Predictions":predictions})
 
-print results
-#results.to_csv("results.csv",index=False)
+results.to_csv("results.csv",index=False)
