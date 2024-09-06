@@ -4,8 +4,12 @@ import yfinance as yf
 from scipy.optimize import minimize
 from ib_insync import *
 
-# Define the stock symbols and the time period
-stocks = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA']
+# Load a list of stock symbols from a CSV file
+stock_csv = 'stock_symbols.csv'  # Replace with actual URL to a CSV file containing stock symbols
+df = pd.read_csv(stock_csv)
+stocks = df['symbol'].tolist()
+
+# Define the time period
 start_date = '2022-01-01'
 end_date = '2023-01-01'
 
