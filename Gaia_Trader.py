@@ -5,7 +5,7 @@ from scipy.optimize import minimize
 from ib_insync import *
 
 # Load a list of stock symbols from a CSV file
-stock_csv = 'stock_symbols.csv'  # Replace with actual URL to a CSV file containing stock symbols
+stock_csv = 'stock_symbols.csv'
 df = pd.read_csv(stock_csv)
 stocks = df['symbol'].tolist()
 
